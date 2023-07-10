@@ -1,9 +1,13 @@
 from django.shortcuts import render
-import datetime
-# Create your views here.
+
+tasks = ["phone", "phone1"]
 
 def index(request):
-    now = datetime.datetime.now()
+    if (request.method == "POST"):
+        task = request.POST.get('task')
+        tasks.append(task)
+
     return render(request, "home/index.html", {
-        "home" : now.month == 1 and now.day == 1
+        "tasks" : tasks
 })
+
